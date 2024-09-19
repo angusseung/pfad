@@ -21,17 +21,16 @@ finalTitles = [text for text in titleTexts if "PHYSICAL" not in text]
 
 for stat in stats:
     stat_text = stat.get_text().strip()
-    numbers = re.findall(r"[-+]?\d*\.\d+|\d+", stat_text)
+    stat_text = stat_text.replace('-', '0')
 
+    numbers = re.findall(r"[+]?\d*\.\d+|\d+", stat_text)
     if numbers:
         for number in numbers:
-            statValues.append(float(number.replace('-', '0')))
-
+            statValues.append(float(number))
 
 for i in range(0, len(statValues), 4):
     total = sum(statValues[i:i+4])
     statTotals.append(total)
 
-
-plt.pie(statTotals)
+plt.pie(statTotals, labels = finalTitles)
 plt.show() 
