@@ -12,10 +12,16 @@ stats = soup.findAll("div", attrs={"class": "substats_col_month"})
 titleTexts = []
 finalTitles = []
 statValues = []
-statTotals = []
+statAvgs = []
 
+os = 'WINDOWS'
 for title in titles:
-    titleTexts.append(title.text)
+    if "OSX" in title.text:
+        os = "OSX"
+    if "LINUX" in title.text:
+        os = "LINUX"
+    print(title.text)
+    titleTexts.append(os + ' ' + title.text)
 
 finalTitles = [text for text in titleTexts if "PHYSICAL" not in text]
 
@@ -29,8 +35,8 @@ for stat in stats:
             statValues.append(float(number))
 
 for i in range(0, len(statValues), 4):
-    total = sum(statValues[i:i+4])
-    statTotals.append(total)
+    total = sum(statValues[i:i+4]) / 4
+    statAvgs.append(total)
 
-plt.pie(statTotals, labels = finalTitles)
-plt.show() 
+plt.pie(statAvgs, labels = finalTitles)
+plt.show()
