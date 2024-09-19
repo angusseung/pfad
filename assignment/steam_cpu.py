@@ -20,7 +20,6 @@ for title in titles:
         os = "OSX"
     if "LINUX" in title.text:
         os = "LINUX"
-    print(title.text)
     titleTexts.append(os + ' ' + title.text)
 
 finalTitles = [text for text in titleTexts if "PHYSICAL" not in text]
@@ -41,4 +40,5 @@ for i in range(0, len(statValues), 4):
 finalTitles = [title if stat >= 5 else '' for title, stat in zip(finalTitles, statAvgs)]
 
 plt.pie(statAvgs, labels = finalTitles)
+plt.legend(loc='upper left')
 plt.show()
