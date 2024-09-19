@@ -37,6 +37,8 @@ for stat in stats:
 for i in range(0, len(statValues), 4):
     total = sum(statValues[i:i+4]) / 4
     statAvgs.append(total)
+    
+finalTitles = [title if stat >= 5 else '' for title, stat in zip(finalTitles, statAvgs)]
 
 plt.pie(statAvgs, labels = finalTitles)
 plt.show()
